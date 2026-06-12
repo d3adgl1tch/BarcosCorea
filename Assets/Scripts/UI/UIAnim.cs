@@ -11,6 +11,7 @@ public class UIAnim : MonoBehaviour
     }
     [SerializeField] private animType currentAnim = animType.translate;
     [SerializeField] private Vector3 translateOffset = Vector3.zero;
+    [SerializeField] private Vector3 rotationOffset = Vector3.zero;
     [SerializeField] private float duration = 0.25f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,7 +32,10 @@ public class UIAnim : MonoBehaviour
                 break;
             case animType.rotate:
                 animSequence.Append(
-                    GetComponent<RectTransform>().DORotate(GetComponent<RectTransform>().eulerAngles, .25f));
+                        GetComponent<RectTransform>().DORotate(rotationOffset, duration))
+                    .AppendInterval(.25f)
+                    .Append(GetComponent<RectTransform>().DORotate(Vector3.zero, duration));
+                       
                 break;
             case animType.scale:
                 break;
@@ -40,9 +44,4 @@ public class UIAnim : MonoBehaviour
            animSequence.SetLoops(-1);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

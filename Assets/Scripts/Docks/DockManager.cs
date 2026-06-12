@@ -36,6 +36,7 @@ public class DockManager : MonoBehaviour
         foreach (Transform child in dock.transform)
         {
             child.gameObject.SetActive(true);
+            dock.GetComponent<BoxCollider>().enabled = true;
         }
     }
 

@@ -17,7 +17,7 @@ public class FishManager : MonoBehaviour
     }
     public void SpawnFish()
     {
-        if(FishRef != null) Destroy(FishRef);
+        //if(FishRef != null) Destroy(FishRef);
         GetRandomPoint();
         FishRef=Instantiate(FishPrefab, GetRandomPoint(), Quaternion.identity);
         fishes.Add(FishRef);

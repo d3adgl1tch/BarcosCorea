@@ -10,11 +10,15 @@ public enum GameResult
     Win,
     Lose,
     Playing,
+    WinPlayer1,
+    WinPlayer2,
+    Empate,
 }
 public enum Mode
 {
     FreeTime,
     TimeMode,
+    VersusMode,
     Menus
 }
 public class GameManager : MonoBehaviour
@@ -77,6 +81,11 @@ public class GameManager : MonoBehaviour
         StartGameMode(Mode.TimeMode);
         SceneManager.LoadScene("TimeMode");
     }
+    public void OpenVersusGameMode()
+    {
+        StartGameMode(Mode.VersusMode);
+        SceneManager.LoadScene("VersusMode");
+    }
     public void OpenMainMenu()
     {
         //StartGameMode(Mode.Menus);
@@ -90,6 +99,11 @@ public class GameManager : MonoBehaviour
     public void MenuChoserTimeGameMode()
     {
         gameMode = Mode.TimeMode;
+        SceneManager.LoadScene("Menu");
+    }
+    public void MenuChoserVersusGameMode()
+    {
+        gameMode = Mode.VersusMode;
         SceneManager.LoadScene("Menu");
     }
     public void OpenGameModeChoser()

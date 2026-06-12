@@ -10,9 +10,14 @@ public class MainMenu : MonoBehaviour
    // [SerializeField] private Animator transitionAnimator;
     [SerializeField] private CanvasGroup faderPanel;
     [SerializeField] private float fadeDuration = 1f;
+    [SerializeField] private GameObject freeTutorial;
+    [SerializeField] private GameObject timeTutorial;
+    [SerializeField] private GameObject timonTutorial;
 
     private void Start()
     {
+        freeTutorial.SetActive(false);
+        timeTutorial.SetActive(false);
         FadeIn();
     }
     public void ChangeScene()
@@ -32,19 +37,40 @@ public class MainMenu : MonoBehaviour
     }
     IEnumerator OpenGameMode()
     {
-        yield return faderPanel.DOFade(0f, fadeDuration).SetEase(Ease.InOutQuad).WaitForCompletion();
-
+        timonTutorial.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        timonTutorial.SetActive(false);
+        //Tutoriales
         if (GameManager.instance.gameMode == Mode.TimeMode)
         {
-            //transitionAnimator.SetTrigger("Fade");
-            //yield return new WaitForSeconds(2f);
+            timeTutorial.SetActive(true);
+        }
+        else if (GameManager.instance.gameMode == Mode.FreeTime)
+        {
+            freeTutorial.SetActive(true);
+
+        }
+        else if (GameManager.instance.gameMode == Mode.VersusMode)
+        {
+
+
+        }
+        yield return new WaitForSeconds(5f);
+        yield return faderPanel.DOFade(0f, fadeDuration).SetEase(Ease.InOutQuad).WaitForCompletion();
+        //Escena
+        if (GameManager.instance.gameMode == Mode.TimeMode)
+        {
             GameManager.instance.OpenTimeGameMode();
         }
-        else
+        else if (GameManager.instance.gameMode == Mode.FreeTime)
         {
-            //transitionAnimator.SetTrigger("Fade");
-            //yield return new WaitForSeconds(2f);
+
             GameManager.instance.OpenFreeGameMode();
+            
+        }
+        else if (GameManager.instance.gameMode == Mode.VersusMode)
+        {
+            GameManager.instance.OpenVersusGameMode();
             
         }
         faderPanel.blocksRaycasts = true;

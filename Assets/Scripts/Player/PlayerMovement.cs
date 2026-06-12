@@ -139,16 +139,11 @@ public class PlayerMovement : MonoBehaviour
     #endregion 
     public void RestartPosition()
     {
-        StartCoroutine(WaitToStartMoving());
-    }
-    IEnumerator WaitToStartMoving()
-    {
         playerState.SetState(PlayerStateType.Paused);
         transform.position = initialPosition;
         transform.rotation = initialRotation;
-        yield return new WaitForSeconds(1f);
-        OnGameStart();
     }
+
     #region BoatDockRotation
     private void Rotate()
     {
@@ -193,5 +188,9 @@ public class PlayerMovement : MonoBehaviour
         playerState.SetState(PlayerStateType.Paused);
         rb.angularVelocity = Vector3.zero;
         rb.linearVelocity = Vector3.zero;
+    }
+    public void canMove()
+    {
+        playerState.SetState(PlayerStateType.Moving);
     }
 }

@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private InputAction touchScreen;
     [SerializeField] private InputAction click;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] int playerIndex; // 0 = izquierda, 1 = derecha
 
     private Vector2 firstTouch;
     private Vector2 centerTouch;
@@ -33,12 +34,28 @@ public class PlayerInput : MonoBehaviour
    
     private void Update()
     {
+        Vector2 pos = controller.ReadValue<Vector2>();
+
+        if (!IsTouchInMyArea(pos))
+        {
+            isPressed = false;
+            return;
+        }
+
         if (UsingTouch())
             TouchInput();
         else
             MouseInput();
     }
+    bool IsTouchInMyArea(Vector2 screenPos)
+    {
+        if (playerIndex == 0) return true;
 
+        else if (playerIndex == 1)
+            return screenPos.x < Screen.width * 0.5f; 
+        else
+            return screenPos.x >= Screen.width * 0.5f;
+    }
     void TouchInput()
     {
         if (!touchScreen.IsPressed())
@@ -58,7 +75,7 @@ public class PlayerInput : MonoBehaviour
         }
 
         Vector2 currentVector = new Vector2(pos.x - centerTouch.x, centerTouch.y);
-        angle = Vector2.SignedAngle(firstTouch, currentVector);
+        angle = -Vector2.SignedAngle(firstTouch, currentVector);
         firstTouch = currentVector;
     }
 
@@ -81,7 +98,7 @@ public class PlayerInput : MonoBehaviour
         }
 
         Vector2 currentVector = new Vector2(pos.x - centerTouch.x, centerTouch.y);
-        angle = Vector2.SignedAngle(firstTouch, currentVector);
+        angle = -Vector2.SignedAngle(firstTouch, currentVector);
         firstTouch = currentVector;
     }
 

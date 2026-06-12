@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TimeMode.unity
     guid: 945a6b38f7963da4291bb1a214529012
+  - enabled: 1
+    path: Assets/Scenes/VersusMode.unity
+    guid: 2d6b59fca83716a4da7a271efac14f34
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

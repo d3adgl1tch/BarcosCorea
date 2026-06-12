@@ -10,4 +10,8 @@ public class GameChoserMode : MonoBehaviour
     {
         GameManager.instance.MenuChoserFreeGameMode();
     }
+    public void ChoseVersusMode()
+    {
+        GameManager.instance.MenuChoserVersusGameMode();
+    }
 }

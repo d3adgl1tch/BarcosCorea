@@ -56,6 +56,11 @@ public class BoatMovement : MonoBehaviour
             {
                 player.Crash();
             }
+            PlayerMovementVersus playerVersus = collision.gameObject.GetComponentInChildren<PlayerMovementVersus>();
+            if(playerVersus != null)
+            {
+                playerVersus.Crash();
+            }
         }
         if (collision.gameObject.CompareTag("Boat"))
         {

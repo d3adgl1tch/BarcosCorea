@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ public class DockScript : MonoBehaviour
             if (playerRef != null)
             {
                 Arrived(playerRef);
+                GetComponent<BoxCollider>().enabled = false;
             }
       }
    }
@@ -32,4 +34,6 @@ public class DockScript : MonoBehaviour
             arrow.SetActive(false);
         
     }
+
+    
 }

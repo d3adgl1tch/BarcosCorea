@@ -18,7 +18,7 @@ public class TimonMovement : MonoBehaviour
             float angle = playerAngleMovement.GetAngle;
             float playerRotationSpeed = playerAngleMovement.GetRotationSpeed;
             //transform.localRotation = Quaternion.Euler(0, 0, -targetAngle);
-            transform.Rotate(Vector3.forward * playerAngleMovement.GetAngle * playerAngleMovement.GetRotationSpeed);
+            transform.Rotate(Vector3.forward * -playerAngleMovement.GetAngle * playerAngleMovement.GetRotationSpeed);
         }
     }
 }

@@ -1,5 +1,7 @@
 using NUnit.Framework;
+using DG.Tweening;
 using System.Collections.Generic;
+using System.Collections;
 using System.IO;
 using System.Linq;
 using TMPro;
@@ -27,6 +29,8 @@ public class Scoreboard : MonoBehaviour
     [SerializeField]private TextMeshProUGUI scoreBoardText;
     [SerializeField] private TMP_InputField nameInput;
     [SerializeField] private FreeGameMode gameMode;
+    
+    [SerializeField] private CanvasGroup fadeOut;
     [Header("Tests")]
     public string testName;
     public int testScore;
@@ -96,8 +100,22 @@ public class Scoreboard : MonoBehaviour
     {
         scoreboard.scores = scoreboard.scores.OrderByDescending(s => s.score).ToList();
     }
+    public void QuitToMainMenu()
+    {
+        StartCoroutine(FadeToQuitMainMenu());
+    }
+    
+    IEnumerator FadeToQuitMainMenu()
+    {
+        yield return new WaitForSeconds(5);
+        yield return fadeOut.DOFade(1,1).WaitForCompletion();
+        GameManager.instance.OpenMainMenu();
+
+    }
+    
     void ShowScoreBoard()
     {
+        
         scoreBoardText.text = "";
         for (int i = 0; i < scoreboard.scores.Count; i++)
         {
